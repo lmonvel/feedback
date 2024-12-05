@@ -56,11 +56,14 @@
       message.textContent = `Thank you for your feedback! You selected: ${type}`;
 
       // Optionally send to a backend (replace the URL with your endpoint)
-      fetch("https://script.google.com/macros/s/AKfycbxWFQgqGaYqikR7j74Kmk1dzt-hrK1xvD2evexNcAapfroU_z9fOwAQ9CfWgEVEBgjI/exec", {
-        metho d: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ feedback: type, timestamp: new Date() })
-      }).catch(err => console.error("Error logging feedback:", err));
+      fetch("https://script.google.com/macros/s/YOUR_WEB_APP_URL/exec", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ feedback: "smiley" }) // Replace "smiley" dynamically based on button clicks
+})
+  .then(response => response.text())
+  .then(data => console.log("Response:", data))
+  .catch(error => console.error("Error:", error));
     }
 
     // Add event listeners for buttons
