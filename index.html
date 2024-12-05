@@ -56,7 +56,7 @@
       message.textContent = `Thank you for your feedback! You selected: ${type}`;
 
       // Optionally send to a backend (replace the URL with your endpoint)
-      fetch("https://script.google.com/macros/s/AKfycbxWFQgqGaYqikR7j74Kmk1dzt-hrK1xvD2evexNcAapfroU_z9fOwAQ9CfWgEVEBgjI/exec", {
+      fetch("https://script.google.com/macros/s/AKfycbwd3ID1D_2Ke33BTHKiiM2ZqDKn1Ja4-5U_NVpD_LxdwtwPxg8ZPgxldpnq1WHbjrEV/exec", {
   method: "POST",
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify({ feedback: "smiley" }) // Replace "smiley" dynamically based on button clicks
