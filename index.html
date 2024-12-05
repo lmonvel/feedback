@@ -56,8 +56,8 @@
       message.textContent = `Thank you for your feedback! You selected: ${type}`;
 
       // Optionally send to a backend (replace the URL with your endpoint)
-      fetch("https://example.com/log-feedback", {
-        method: "POST",
+      fetch("https://script.google.com/macros/s/AKfycbxmbvGEy95HnC5EA-VJPMse9nwOoPcGpcuq-TsPLUYHbEutDQ4v0hUqbJtaps7XYcFF/exec", {
+        metho d: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ feedback: type, timestamp: new Date() })
       }).catch(err => console.error("Error logging feedback:", err));
