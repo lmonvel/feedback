@@ -58,6 +58,19 @@
       color: white;
     }
 
+    .survey-option {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      margin: 5px 0;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      background-color: #007BFF;
+      color: white;
+    }
+
     button:hover {
       opacity: 0.9;
     }
@@ -66,31 +79,52 @@
       font-size: 1rem;
       color: #28a745;
       margin-top: 20px;
-      height: 20px; /* Reserve space for the message */
+      height: 20px;
     }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>We Value Your Feedback</h1>
+
+    <p>How was your experience?</p>
     <div id="feedback-buttons">
       <button class="smiley" onclick="sendFeedback('Smiley')">😊</button>
       <button class="neutral" onclick="sendFeedback('Neutral')">😐</button>
       <button class="frowny" onclick="sendFeedback('Frowny')">😟</button>
     </div>
+
+    <p>Why did you attend today? (Select one)</p>
+    <div id="survey-options">
+      <button class="survey-option" onclick="sendSurvey('Interested in food science')">Interested in food science</button>
+      <button class="survey-option" onclick="sendSurvey('Hands-on activities sounded fun')">Hands-on activities sounded fun</button>
+      <button class="survey-option" onclick="sendSurvey('Came for the panel discussion')">Came for the panel discussion</button>
+      <button class="survey-option" onclick="sendSurvey('7 train is working!')">7 train is working!</button>
+      <button class="survey-option" onclick="sendSurvey('Free food!')">Free food!</button>
+      <button class="survey-option" onclick="sendSurvey('Recommended by someone')">Recommended by someone</button>
+    </div>
+
     <div id="message" class="message"></div>
   </div>
 
   <script>
-    function sendFeedback(feedback) {
-      const formUrl = "https://formspree.io/f/mjkvzren"; // Replace with your Formspree form ID
+    const formUrl = "https://formspree.io/f/mjkvzren"; // Replace with your Formspree form ID
 
+    function sendFeedback(feedback) {
+      sendData({ feedback: feedback });
+    }
+
+    function sendSurvey(response) {
+      sendData({ survey_response: response });
+    }
+
+    function sendData(data) {
       fetch(formUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ feedback: feedback })
+        body: JSON.stringify(data)
       })
         .then(response => {
           if (response.ok) {
@@ -104,7 +138,6 @@
           document.getElementById("message").textContent = "Something went wrong. Please try again!";
         });
 
-      // Reset the message after 5 seconds
       setTimeout(() => {
         document.getElementById("message").textContent = "";
       }, 5000);
