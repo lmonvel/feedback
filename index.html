@@ -96,11 +96,9 @@
 
     <p>Why did you attend today? (Select one)</p>
     <div id="survey-options">
-      <button class="survey-option" onclick="sendSurvey('Interested in food science')">Interested in food science</button>
-      <button class="survey-option" onclick="sendSurvey('Hands-on activities sounded fun')">Hands-on activities sounded fun</button>
-      <button class="survey-option" onclick="sendSurvey('Came for the panel discussion')">Came for the panel discussion</button>
       <button class="survey-option" onclick="sendSurvey('7 train is working!')">7 train is working!</button>
-      <button class="survey-option" onclick="sendSurvey('Free food!')">Free food!</button>
+      <button class="survey-option" onclick="sendSurvey('Interested in food science')">Interested in food science</button>
+      <button class="survey-option" onclick="sendSurvey('Panel & activities sounded fun')">Panel & activities sounded fun</button>
       <button class="survey-option" onclick="sendSurvey('Recommended by someone')">Recommended by someone</button>
     </div>
 
@@ -108,7 +106,7 @@
   </div>
 
   <script>
-    const formUrl = "https://formspree.io/f/mjkvzren"; // Replace with your Formspree form ID
+    const formUrl = "https://formspree.io/f/mjkvzren"; // Replace with your actual Formspree endpoint
 
     function sendFeedback(feedback) {
       sendData({ feedback: feedback });
@@ -126,18 +124,19 @@
         },
         body: JSON.stringify(data)
       })
-        .then(response => {
-          if (response.ok) {
-            document.getElementById("message").textContent = "Thank you for your feedback!";
-          } else {
-            document.getElementById("message").textContent = "Something went wrong. Please try again!";
-          }
-        })
-        .catch(error => {
-          console.error("Error:", error);
+      .then(response => {
+        if (response.ok) {
+          document.getElementById("message").textContent = "Thank you for your feedback!";
+        } else {
           document.getElementById("message").textContent = "Something went wrong. Please try again!";
-        });
+        }
+      })
+      .catch(error => {
+        console.error("Error:", error);
+        document.getElementById("message").textContent = "Something went wrong. Please try again!";
+      });
 
+      // Reset the message after 5 seconds
       setTimeout(() => {
         document.getElementById("message").textContent = "";
       }, 5000);
